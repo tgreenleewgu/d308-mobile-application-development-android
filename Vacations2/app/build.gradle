@@ -39,7 +39,10 @@ dependencies {
     androidTestImplementation libs.espresso.core
 
     // Room components
-    implementation("androidx.room:room-runtime:${rootProject.extra.get("roomVersion")}")
-    annotationProcessor("androidx.room:room-compiler:${rootProject.extra.get("roomVersion")}")
-    androidTestImplementation("androidx.room:room-testing:${rootProject.extra.get("roomVersion")}")
+    //implementation("androidx.room:room-runtime:${rootProject.extra.get("roomVersion")}")
+    implementation libs.room.runtime
+    //annotationProcessor("androidx.room:room-compiler:${rootProject.extra.get("roomVersion")}")
+    annotationProcessor "androidx.room:room-compiler:2.6.1"
+    //androidTestImplementation("androidx.room:room-testing:${rootProject.extra.get("roomVersion")}")
+    testImplementation "androidx.room:room-testing:2.6.1"
 }

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F8F8"
+    tools:context=".UI.VacationInformation">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="409dp"
+        android:layout_height="200dp"
+        android:background="#00BCD4"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:padding="10dp"
+                    android:text="Vacation Name: "
+                    tools:ignore="HardcodedText" />
+
+                <EditText
+                    android:id="@+id/titletext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:hint="Destenation"
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:padding="10dp"
+                    android:text="Hotel: "
+                    tools:ignore="HardcodedText" />
+
+                <EditText
+                    android:id="@+id/hoteltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:hint="Hotel Name" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/startDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:padding="10dp"
+                android:ems="10"
+                android:inputType="date"
+                android:text="Start Date"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/endDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:padding="10dp"
+                android:ems="10"
+                android:inputType="date"
+                android:text="End Date"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
