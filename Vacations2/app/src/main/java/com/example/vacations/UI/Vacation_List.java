@@ -14,6 +14,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.vacations.R;
+import com.example.vacations.entities.Vacation;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class Vacation_List extends AppCompatActivity {
@@ -47,7 +48,8 @@ public class Vacation_List extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
        if(item.getItemId()==R.id.add_vacation){
-           Toast.makeText(Vacation_List.this, "Add Vacation", Toast.LENGTH_LONG).show();
+           //Toast.makeText(Vacation_List.this, "Add Vacation", Toast.LENGTH_LONG).show();
+           //Vacation vacation = new Vacation(0,);
            return true;
 
 
