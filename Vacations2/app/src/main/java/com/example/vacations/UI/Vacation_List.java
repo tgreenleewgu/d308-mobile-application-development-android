@@ -14,10 +14,12 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.vacations.R;
+import com.example.vacations.database.Repository;
 import com.example.vacations.entities.Vacation;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class Vacation_List extends AppCompatActivity {
+    private Repository repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +49,24 @@ public class Vacation_List extends AppCompatActivity {
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
        if(item.getItemId()==R.id.add_vacation){
-           //Toast.makeText(Vacation_List.this, "Add Vacation", Toast.LENGTH_LONG).show();
-           //Vacation vacation = new Vacation(0,);
+           repository = new Repository(getApplication());
+           Toast.makeText(Vacation_List.this, "Add Vacation", Toast.LENGTH_LONG).show();
+           Vacation vacation1 = new Vacation(0, "Paris", "Le Meridien Etoile", "06/15/2024", "06/22/2024");
+           repository.insertVacation(vacation1);
+
+           Vacation vacation2 = new Vacation(0, "New York", "The Plaza Hotel", "09/01/2024", "09/07/2024");
+           repository.insertVacation(vacation2);
+
+           Vacation vacation3 = new Vacation(0, "Tokyo", "Shinjuku Granbell Hotel", "10/10/2024", "10/17/2024");
+           repository.insertVacation(vacation3);
+
+           Vacation vacation4 = new Vacation(0, "London", "The Ritz London", "01/05/2025", "01/12/2025");
+           repository.insertVacation(vacation4);
+
+           Vacation vacation5 = new Vacation(0, "Sydney", "The Langham", "03/20/2025", "03/27/2025");
+           repository.insertVacation(vacation5);
            return true;
 
 
