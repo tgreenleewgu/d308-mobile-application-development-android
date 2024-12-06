@@ -49,12 +49,12 @@ public class VacationInformation extends AppCompatActivity {
         startDateButton.setOnClickListener(v -> showDatePicker(startDateButton));
         endDateButton.setOnClickListener(v -> showDatePicker(endDateButton));
 
-//        RecyclerView recyclerView = findViewById(R.id.excursionrecyclerView);
-//        repository = new Repository(getApplication());
-//        final ExcursionAdapter excursionAdapter = new ExcursionAdapter(this);
-//        recyclerView.setAdapter(excursionAdapter);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        excursionAdapter.setExcursions(repository.getAllExcursions());
+        RecyclerView recyclerView = findViewById(R.id.vacationrecyclerview);
+        repository = new Repository(getApplication());
+        final ExcursionAdapter excursionAdapter = new ExcursionAdapter(this);
+        recyclerView.setAdapter(excursionAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        excursionAdapter.setExcursions(repository.getAllExcursions());
     }
 
 
