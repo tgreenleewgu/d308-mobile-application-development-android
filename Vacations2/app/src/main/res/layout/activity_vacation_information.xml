@@ -10,20 +10,27 @@
 
     <ScrollView
         android:id="@+id/scrollView"
-        android:layout_width="409dp"
-        android:layout_height="200dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="#00BCD4"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
@@ -35,15 +42,18 @@
 
                 <EditText
                     android:id="@+id/titletext"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="50dp"
-                    android:hint="Destenation"
+                    android:layout_weight="1"
+                    android:hint="Destination"
+                    android:padding="10dp"
                     tools:ignore="HardcodedText" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
@@ -55,20 +65,20 @@
 
                 <EditText
                     android:id="@+id/hoteltext"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="50dp"
-                    android:hint="Hotel Name" />
-
+                    android:layout_weight="1"
+                    android:hint="Hotel Name"
+                    android:padding="10dp" />
             </LinearLayout>
 
             <Button
                 android:id="@+id/startDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="12dp"
                 android:padding="10dp"
-                android:ems="10"
-                android:inputType="date"
                 android:text="Start Date"
                 tools:ignore="HardcodedText" />
 
@@ -76,10 +86,9 @@
                 android:id="@+id/endDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="12dp"
                 android:padding="10dp"
-                android:ems="10"
-                android:inputType="date"
                 android:text="End Date"
                 tools:ignore="HardcodedText" />
 

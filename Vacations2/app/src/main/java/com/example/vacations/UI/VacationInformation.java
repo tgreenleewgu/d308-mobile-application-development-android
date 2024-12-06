@@ -11,8 +11,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vacations.R;
+import com.example.vacations.database.Repository;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Calendar;
@@ -21,6 +24,7 @@ public class VacationInformation extends AppCompatActivity {
 
     private String startDate; // Variable to store start date
     private String endDate;   // Variable to store end date
+    Repository repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +48,15 @@ public class VacationInformation extends AppCompatActivity {
         // Attach click listeners to buttons
         startDateButton.setOnClickListener(v -> showDatePicker(startDateButton));
         endDateButton.setOnClickListener(v -> showDatePicker(endDateButton));
+
+//        RecyclerView recyclerView = findViewById(R.id.excursionrecyclerView);
+//        repository = new Repository(getApplication());
+//        final ExcursionAdapter excursionAdapter = new ExcursionAdapter(this);
+//        recyclerView.setAdapter(excursionAdapter);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        excursionAdapter.setExcursions(repository.getAllExcursions());
     }
+
 
     /**
      * Opens a DatePickerDialog, updates the button text, and saves the selected date.
