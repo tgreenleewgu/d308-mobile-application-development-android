@@ -73,6 +73,9 @@ public class ExcursionAdapter extends RecyclerView.Adapter<ExcursionAdapter.Excu
         if (mExcursions != null) {
             // Get the excursion at the current position
             Excursion current = mExcursions.get(position);
+            String excursionName = current.getExcursionName();
+            String excursionDate = current.getExcursionDate();
+            int vacationId = current.getVacationId();
             // Set the excursion name and date to the TextView
             holder.getExcursionItemView().setText(current.getExcursionName());
             holder.getExcursionItemView2().setText(current.getExcursionDate());
