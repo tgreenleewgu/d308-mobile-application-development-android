@@ -58,6 +58,18 @@ public class Vacation_List extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_vacation_list, menu);
         return true;
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        List<Vacation> allvacations = repository.getAllVacations();
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        final VacationAdapter vacationAdapter = new VacationAdapter(this);
+        recyclerView.setAdapter(vacationAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        vacationAdapter.setVacations(allvacations);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 

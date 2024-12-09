@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Vacation_List.class);
                 intent.putExtra("vacation", "vacation");
+
                 startActivity(intent);
 
                 }

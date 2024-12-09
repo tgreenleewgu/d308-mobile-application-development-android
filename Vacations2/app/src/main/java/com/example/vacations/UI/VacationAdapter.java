@@ -32,6 +32,7 @@ public class VacationAdapter extends RecyclerView.Adapter<VacationAdapter.Vacati
             super(itemView);
             vacationItemView = itemView.findViewById(R.id.textView2);
             itemView.setOnClickListener(new View.OnClickListener() {
+                
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();

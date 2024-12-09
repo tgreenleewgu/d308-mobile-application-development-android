@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Save Excursion"
+    android:id="@+id/excursionsave"
+        tools:ignore="HardcodedText" />
+    <item android:title="Delete Excursion"
+        android:id="@+id/excursiondelete"
+        tools:ignore="HardcodedText" />
+    <item android:title="Set Alert"
+        android:id="@+id/excursionalert"
+        tools:ignore="HardcodedText" />
+</menu>

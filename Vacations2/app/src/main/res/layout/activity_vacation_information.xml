@@ -41,11 +41,11 @@
                     tools:ignore="HardcodedText" />
 
                 <EditText
-                    android:id="@+id/titletext"
+                    android:id="@+id/vacationName"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:hint="Destination"
+                    android:hint="Vacation Name"
                     android:padding="10dp"
                     tools:ignore="HardcodedText" />
             </LinearLayout>
@@ -69,7 +69,8 @@
                     android:layout_height="50dp"
                     android:layout_weight="1"
                     android:hint="Hotel Name"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    tools:ignore="HardcodedText" />
             </LinearLayout>
 
             <Button

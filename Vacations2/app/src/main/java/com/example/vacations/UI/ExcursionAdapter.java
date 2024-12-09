@@ -21,7 +21,7 @@ public class ExcursionAdapter extends RecyclerView.Adapter<ExcursionAdapter.Excu
     private final Context context;
     private final LayoutInflater mInflater;
 
-    // ViewHolder class for handling excursion items
+    // ViewHolder class for handling currentExcursion items
     class ExcursionViewHolder extends RecyclerView.ViewHolder {
         private final TextView excursionItemView;
         private final TextView excursionItemView2;
@@ -36,7 +36,7 @@ public class ExcursionAdapter extends RecyclerView.Adapter<ExcursionAdapter.Excu
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
-                    final Excursion current = mExcursions.get(position);  // Get the excursion at that position
+                    final Excursion current = mExcursions.get(position);  // Get the currentExcursion at that position
                     Intent intent = new Intent(context, ExcursionInformation.class);
                     intent.putExtra("excursionId", current.getExcursionId());
                     intent.putExtra("excursionName", current.getExcursionName());
@@ -68,6 +68,7 @@ public class ExcursionAdapter extends RecyclerView.Adapter<ExcursionAdapter.Excu
         return new ExcursionViewHolder(itemView);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ExcursionViewHolder holder, int position) {
         if (mExcursions != null) {

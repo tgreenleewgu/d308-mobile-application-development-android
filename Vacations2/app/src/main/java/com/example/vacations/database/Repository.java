@@ -12,8 +12,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Repository {
-    private final ExcursionDAO mExcursionDAO;
-    private final VacationDAO mVacationDAO;
+    private  ExcursionDAO mExcursionDAO;
+    private  VacationDAO mVacationDAO;
 
     private List<Vacation> mAllVacations;
     private List<Excursion> mAllExcursions;
@@ -106,6 +106,9 @@ public class Repository {
         waitForResult();
     }
 
+    public List<Excursion> getExcursionsByVacationId(int vacationId) {
+        return mExcursionDAO.getExcursionsByVacationId(vacationId);
+    }
     // Utility method to wait for background tasks to finish
     private void waitForResult() {
         try {
@@ -114,6 +117,8 @@ public class Repository {
             throw new RuntimeException(e);
         }
     }
+
+
 }
 
 
