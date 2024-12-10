@@ -68,11 +68,13 @@ public class VacationInformation extends AppCompatActivity {
 
         editVacationName = findViewById(R.id.vacationName);
         editVacationHotel = findViewById(R.id.hoteltext);
-        vacationName = getIntent().getStringExtra("vacationName");
-        vacationHotel = getIntent().getStringExtra("vacationHotel");
+        vacationName = getIntent().getStringExtra("VacationName");
+        vacationHotel = getIntent().getStringExtra("VacationHotel");
         editVacationName.setText(vacationName);
         editVacationHotel.setText(vacationHotel);
-        vacationId = getIntent().getIntExtra("vacationId", -1);
+        vacationId = getIntent().getIntExtra("Id", -1);
+        startDate = getIntent().getStringExtra("StartDate");
+        endDate = getIntent().getStringExtra("EndDate");
         if (startDate != null) startDateButton.setText(startDate);
         if (endDate != null) endDateButton.setText(endDate);
 
@@ -82,7 +84,9 @@ public class VacationInformation extends AppCompatActivity {
         final ExcursionAdapter excursionAdapter = new ExcursionAdapter(this);
         recyclerView.setAdapter(excursionAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        excursionAdapter.setExcursions(repository.getAllExcursions());
+//        excursionAdapter.setExcursions(repository.getAllExcursions());
+//        excursionAdapter.setExcursions(repository.getExcursionsByVacationId(vacationId));
+        excursionAdapter.setExcursions(repository.getAssociatedExcursions(vacationId));
     }
 
 //        RecyclerView recyclerView = findViewById(R.id.vacationrecyclerview);

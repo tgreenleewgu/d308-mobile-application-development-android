@@ -15,15 +15,15 @@ import com.example.vacations.database.Repository;
 
 public class ExcursionInformation extends AppCompatActivity {
 
-//    String excursionName; // Variable to store excursion name
-//    String excursionDate; // Variable to store excursion date
-//    int excursionId; // Variable to store excursion ID
-//    int vacationId; // Variable to store vacation ID
-//    EditText editExcursionName; // Variable to store excursion name
-//    EditText editExcursionDate; // Variable to store excursion date
-//    EditText editexcursionAlert;
-//    Repository repository;
-//    DatePickerDialog.OnDateSetListener startDate;
+    String excursionName; // Variable to store excursion name
+    String excursionDate; // Variable to store excursion date
+    int excursionId; // Variable to store excursion ID
+    int vacationId; // Variable to store vacation ID
+    EditText editExcursionName; // Variable to store excursion name
+    EditText editExcursionDate; // Variable to store excursion date
+    EditText editexcursionAlert;
+    Repository repository;
+    DatePickerDialog.OnDateSetListener startDate;
 
 
     @Override

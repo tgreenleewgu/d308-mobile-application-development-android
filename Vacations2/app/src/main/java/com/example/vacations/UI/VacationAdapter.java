@@ -32,15 +32,15 @@ public class VacationAdapter extends RecyclerView.Adapter<VacationAdapter.Vacati
             super(itemView);
             vacationItemView = itemView.findViewById(R.id.textView2);
             itemView.setOnClickListener(new View.OnClickListener() {
-                
+
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     final Vacation current = mVacations.get(position);
                     Intent intent = new Intent(context, VacationInformation.class);
-                    intent.putExtra("id", current.getVacationId());
+                    intent.putExtra("Id", current.getVacationId());
                     intent.putExtra("VacationName", current.getVacationName());
-                    intent.putExtra("vacationHotel", current.getVacationHotel());
+                    intent.putExtra("VacationHotel", current.getVacationHotel());
                     intent.putExtra("StartDate", current.getStartDate());
                     intent.putExtra("EndDate", current.getEndDate());
                     context.startActivity(intent);
@@ -60,6 +60,7 @@ public class VacationAdapter extends RecyclerView.Adapter<VacationAdapter.Vacati
     public void onBindViewHolder(@NonNull VacationAdapter.VacationViewHolder holder, int position) {
         if(mVacations != null){
             Vacation current = mVacations.get(position);
+            String VacationName = current.getVacationName();
             holder.vacationItemView.setText(current.getVacationName());
         } else {
             holder.vacationItemView.setText("No Vacation");
