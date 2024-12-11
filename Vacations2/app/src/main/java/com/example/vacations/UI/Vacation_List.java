@@ -74,6 +74,7 @@ public class Vacation_List extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
        if(item.getItemId()==R.id.add_vacation){
+           //Paris
            Vacation vacation1 = new Vacation(0, "Paris", "Le Meridien Etoile", "06/15/2024", "06/22/2024");
            repository.insertVacation(vacation1);
 
@@ -83,6 +84,7 @@ public class Vacation_List extends AppCompatActivity {
            Excursion excursion2 = new Excursion(0, "Louvre Museum", 1, "06/17/2024");
            repository.insertExcursion(excursion2);
 
+           //New York
            Vacation vacation2 = new Vacation(0, "New York", "The Plaza Hotel", "09/01/2024", "09/07/2024");
            repository.insertVacation(vacation2);
 
@@ -92,6 +94,7 @@ public class Vacation_List extends AppCompatActivity {
            Excursion excursion4 = new Excursion(0, "Central Park", 2, "09/03/2024");
            repository.insertExcursion(excursion4);
 
+           //Tokyo
            Vacation vacation3 = new Vacation(0, "Tokyo", "Shinjuku Granbell Hotel", "10/10/2024", "10/17/2024");
            repository.insertVacation(vacation3);
 
@@ -101,6 +104,7 @@ public class Vacation_List extends AppCompatActivity {
            Excursion excursion6 = new Excursion(0, "Shibuya Crossing", 3, "10/12/2024");
            repository.insertExcursion(excursion6);
 
+           //London
            Vacation vacation4 = new Vacation(0, "London", "The Ritz London", "01/05/2025", "01/12/2025");
            repository.insertVacation(vacation4);
 
@@ -110,6 +114,7 @@ public class Vacation_List extends AppCompatActivity {
            Excursion excursion8 = new Excursion(0, "London Eye", 4, "01/07/2025");
            repository.insertExcursion(excursion8);
 
+           //Sydney
            Vacation vacation5 = new Vacation(0, "Sydney", "The Langham", "03/20/2025", "03/27/2025");
            repository.insertVacation(vacation5);
 
