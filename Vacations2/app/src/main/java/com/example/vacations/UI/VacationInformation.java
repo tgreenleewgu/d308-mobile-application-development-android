@@ -34,12 +34,11 @@ public class VacationInformation extends AppCompatActivity {
     int vacationId; // Variable to store vacation ID
     EditText editVacationName; // Variable to store vacation name
     EditText editVacationHotel; // Variable to store vacation hotel
-
-
-
     String startDate; // Variable to store start date
     String endDate;   // Variable to store end date
     Repository repository;
+
+    List<Excursion> sortedExcursions = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,28 +83,9 @@ public class VacationInformation extends AppCompatActivity {
         final ExcursionAdapter excursionAdapter = new ExcursionAdapter(this);
         recyclerView.setAdapter(excursionAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        excursionAdapter.setExcursions(repository.getAllExcursions());
-//        excursionAdapter.setExcursions(repository.getExcursionsByVacationId(vacationId));
         excursionAdapter.setExcursions(repository.getAssociatedExcursions(vacationId));
     }
 
-//        RecyclerView recyclerView = findViewById(R.id.vacationrecyclerview);
-//        repository = new Repository(getApplication());
-//        final ExcursionAdapter excursionAdapter = new ExcursionAdapter(this);
-//        recyclerView.setAdapter(excursionAdapter);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//
-//// Filter excursions by vacationId
-//        List<Excursion> filteredExcursions = new ArrayList<>();
-//        for (Excursion currentExcursion : repository.getAllExcursions()) {
-//            if (currentExcursion.getVacationId() == vacationId) { // Compare currentExcursion's vacationId
-//                filteredExcursions.add(currentExcursion); // Add matching excursions
-//            }
-//        }
-//
-//// Set the filtered excursions to the adapter
-//        excursionAdapter.setExcursions(filteredExcursions);
-//    }
 
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -113,74 +93,70 @@ public class VacationInformation extends AppCompatActivity {
         return true;
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        if (item.getItemId() == R.id.vacationsave) {
-//            Vacation vacation;
-//            if (vacationId == -1) {
-//                if (repository.getAllVacations().size() == 0) vacationId = 1;
-//                else
-//                    vacationId = repository.getAllVacations().get(repository.getAllVacations().size() - 1).getVacationId() + 1;
-//                vacation = new Vacation(vacationId, editVacationName.getText().toString(), editVacationHotel.getText().toString(), startDate, endDate);
-//
-//            }
-//            else {
-//                vacation = new Vacation(vacationId, editVacationName.getText().toString(), editVacationHotel.getText().toString(), startDate, endDate);
-//                repository.updateVacation(vacation);
-//            }
-//        }
-//        return true;
-//    }
 
-@Override
 public boolean onOptionsItemSelected(MenuItem item) {
     if (item.getItemId() == R.id.vacationsave) {
         // Validate inputs
         if (editVacationName.getText().toString().isEmpty() ||
                 editVacationHotel.getText().toString().isEmpty() ||
-                startDate == null ||
-                endDate == null) {
+                startDate == null || endDate == null) {
 
             Toast.makeText(this, "Please fill in all fields before saving.", Toast.LENGTH_SHORT).show();
-            return false; // Do not proceed with saving
+            return false;
         }
 
-        Vacation vacation;
+        // Validate date logic
+        if (endDate.compareTo(startDate) < 0) {            Toast.makeText(this, "End date cannot be before start date.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
 
+        // Create or update Vacation object
+        Vacation vacation = new Vacation(
+                vacationId != -1 ? vacationId : generateVacationId(),
+                editVacationName.getText().toString(),
+                editVacationHotel.getText().toString(),
+                startDate,
+                endDate
+        );
+
+        // Insert or update Vacation in repository
         if (vacationId != -1) {
-            // Update existing vacation
-            vacation = new Vacation(
-                    vacationId,
-                    editVacationName.getText().toString(),
-                    editVacationHotel.getText().toString(),
-                    startDate,
-                    endDate
-            );
-            repository.updateVacation(vacation); // Update the vacation in the repository
+            repository.updateVacation(vacation);
         } else {
-            // Create new vacation
-            if (repository.getAllVacations().size() == 0) {
-                vacationId = 1;
-            } else {
-                vacationId = repository.getAllVacations()
-                        .get(repository.getAllVacations().size() - 1)
-                        .getVacationId() + 1;
-            }
-            vacation = new Vacation(
-                    vacationId,
-                    editVacationName.getText().toString(),
-                    editVacationHotel.getText().toString(),
-                    startDate,
-                    endDate
-            );
-            repository.insertVacation(vacation); // Insert new vacation
+            repository.insertVacation(vacation);
         }
 
-        // Provide user feedback and close activity
+        // Provide user feedback
         Toast.makeText(this, "Vacation saved successfully!", Toast.LENGTH_SHORT).show();
         finish(); // Close the activity
+        return true;
+
+    } else if (item.getItemId() == R.id.vacationdelete) {
+        // Check if any excursions are associated with this vacation
+        List<Excursion> associatedExcursions = repository.getAssociatedExcursions(vacationId);
+        if (associatedExcursions != null && !associatedExcursions.isEmpty()) {
+            Toast.makeText(this, "Cannot delete vacation with associated excursions.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        // Delete the vacation
+        Vacation vacationToDelete = new Vacation(vacationId, null, null, null, null);
+        repository.deleteVacation(vacationToDelete);
+        Toast.makeText(this, "Vacation deleted successfully!", Toast.LENGTH_SHORT).show();
+        finish(); // Close the activity
+        return true;
     }
+
     return super.onOptionsItemSelected(item);
+}
+
+    // Helper method to generate a new vacation ID
+    private int generateVacationId() {
+        List<Vacation> allVacations = repository.getAllVacations();
+        if (allVacations.isEmpty()) {
+            return 1; // Start ID from 1 if no vacations exist
+        }
+        return allVacations.get(allVacations.size() - 1).getVacationId() + 1;
 }
 
     /**
@@ -252,4 +228,27 @@ public boolean onOptionsItemSelected(MenuItem item) {
     public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        List<Excursion> allExcursions = repository.getAllExcursions();
+        RecyclerView recyclerView = findViewById(R.id.vacationrecyclerview);
+        final ExcursionAdapter excursionAdapter = new ExcursionAdapter(this);
+        recyclerView.setAdapter(excursionAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        excursionAdapter.setExcursions(allExcursions);
+        excursionAdapter.setExcursions(repository.getAssociatedExcursions(vacationId));
+
+//        List<Vacation> allVacations = repository.getAllVacations();
+//        // Assuming there is a RecyclerView for vacations
+//        RecyclerView vacationRecyclerView = findViewById(R.id.recyclerView);
+//        final VacationAdapter vacationAdapter = new VacationAdapter(this);
+//        vacationRecyclerView.setAdapter(vacationAdapter);
+//        vacationRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        vacationAdapter.setVacations(allVacations);
+//    }
+
+    }
 }
+

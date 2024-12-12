@@ -1,6 +1,7 @@
 package com.example.vacations.database;
 
 import android.app.Application;
+import android.view.Menu;
 
 import com.example.vacations.dao.ExcursionDAO;
 import com.example.vacations.dao.VacationDAO;
@@ -119,6 +120,9 @@ public class Repository {
     }
 
 
+    public Menu getAssociatedAlerts(int excursionId) {
+        return null;
+    }
 }
 
 
