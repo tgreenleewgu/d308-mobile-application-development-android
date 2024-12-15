@@ -37,6 +37,7 @@ public class VacationInformation extends AppCompatActivity {
     String startDate; // Variable to store start date
     String endDate;   // Variable to store end date
     Repository repository;
+    RecyclerView recyclerView;
 
     List<Excursion> sortedExcursions = new ArrayList<>();
 
@@ -78,7 +79,7 @@ public class VacationInformation extends AppCompatActivity {
         if (endDate != null) endDateButton.setText(endDate);
 
 
-        RecyclerView recyclerView = findViewById(R.id.vacationrecyclerview);
+        recyclerView = findViewById(R.id.vacationrecyclerview);
         repository = new Repository(getApplication());
         final ExcursionAdapter excursionAdapter = new ExcursionAdapter(this);
         recyclerView.setAdapter(excursionAdapter);
@@ -233,7 +234,6 @@ public boolean onOptionsItemSelected(MenuItem item) {
     protected void onResume() {
         super.onResume();
         List<Excursion> allExcursions = repository.getAllExcursions();
-        RecyclerView recyclerView = findViewById(R.id.vacationrecyclerview);
         final ExcursionAdapter excursionAdapter = new ExcursionAdapter(this);
         recyclerView.setAdapter(excursionAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

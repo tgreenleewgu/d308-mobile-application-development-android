@@ -65,7 +65,7 @@ public class ExcursionInformation extends AppCompatActivity {
 
         // Retrieve data from Intent
         excursionName = getIntent().getStringExtra("excursionName");
-        excursionId = getIntent().getIntExtra("excursionId", -1);
+        excursionId = getIntent().getIntExtra("excursionId", 0);
         vacationId = getIntent().getIntExtra("vacationId", -1);
         excursionDate = getIntent().getStringExtra("excursionDate");
 
@@ -188,52 +188,67 @@ public class ExcursionInformation extends AppCompatActivity {
 //    }
 @Override
 public boolean onOptionsItemSelected(MenuItem item) {
-    if (item.getItemId() == R.id.excursionsave) {
-        String excursionTitle = editExcursionName.getText().toString();
-        String excursionDateString = editExcursionDate.getText().toString();
+        if (item.getItemId() == R.id.excursionsave) {
+            String excursionTitle = editExcursionName.getText().toString();
+            String excursionDateString = editExcursionDate.getText().toString();
 
-        if (excursionTitle.isEmpty() || excursionDateString.isEmpty()) {
-            Toast.makeText(this, "Please fill in all fields before saving.", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy", Locale.US);
-        try {
-            Date date = sdf.parse(excursionDateString);
-
-            // Ensure excursion date is within the vacation period
-            Vacation vacation = null;
-            for (Vacation vac : repository.getAllVacations()) {
-                if (vac.getVacationId() == vacationId) {
-                    vacation = vac;
-                    break;
-                }
+            if (excursionTitle.isEmpty() || excursionDateString.isEmpty()) {
+                Toast.makeText(this, "Please fill in all fields before saving.", Toast.LENGTH_SHORT).show();
+                return false;
             }
 
-            if (vacation != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy", Locale.US);
+            try {
+                Date date = sdf.parse(excursionDateString);
+
+                // Ensure excursion date is within the vacation period
+                Vacation vacation = null;
+                for (Vacation vac : repository.getAllVacations()) {
+                    if (vac.getVacationId() == vacationId) {
+                        vacation = vac;
+                        break;
+                    }
+                }
+
+                if (vacation == null) {
+                    Log.e("ExcursionSave", "Vacation not found for ID: " + vacationId);
+                    Toast.makeText(this, "Associated vacation not found.", Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+
                 Date startDate = sdf.parse(vacation.getStartDate());
                 Date endDate = sdf.parse(vacation.getEndDate());
 
+                assert date != null;
                 if (date.before(startDate) || date.after(endDate)) {
                     Toast.makeText(this, "Excursion date must be within the vacation's start and end dates.", Toast.LENGTH_LONG).show();
-                    return false; // Indicate unsuccessful handling
+                    return false;
                 }
-            }
 
-            // Create Excursion object with title, date, and vacationId
-            Excursion excursion = new Excursion(excursionId, excursionName, vacationId, excursionDate);
+                // Create Excursion object with title, date, and vacationId
+                Excursion excursion = new Excursion(excursionId, excursionTitle, vacationId, excursionDateString);
 
-            // Save the Excursion object using repository (assuming appropriate save method)
-            repository.updateExcursion(excursion);
+                if (excursionId == 0) {
+                    repository.insertExcursion(excursion);
+                } else {
+                    repository.updateExcursion(excursion);
+                }
 
-            // Show success message (optional)
-            Toast.makeText(this, "Excursion saved successfully!", Toast.LENGTH_SHORT).show();
-            return true; // Indicate successful handling
-        } catch (ParseException e) {
-            // Handle parsing exception (e.g., invalid date format)
-            Toast.makeText(this, "Invalid excursion date format.", Toast.LENGTH_SHORT).show();
-            return false;
+                // Show success message
+                Toast.makeText(this, "Excursion saved successfully!", Toast.LENGTH_SHORT).show();
+
+                // Notify parent activity and finish
+                Intent resultIntent = new Intent();
+                setResult(RESULT_OK, resultIntent);
+                finish();
+
+                return true;
+            } catch (ParseException e) {
+                Log.e("ExcursionSave", "Invalid date format: " + excursionDateString, e);
+                Toast.makeText(this, "Invalid excursion date format.", Toast.LENGTH_SHORT).show();
+                return false;
         }
+
     } else if (item.getItemId() == R.id.excursiondelete) {
         // Check if any alerts are associated with this excursion
 //        numAlert = repository.getAssociatedAlerts(excursionId).size();
