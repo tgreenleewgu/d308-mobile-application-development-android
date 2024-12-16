@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    static int numAlert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

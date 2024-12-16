@@ -44,7 +44,7 @@ public class ExcursionInformation extends AppCompatActivity {
     Repository repository;
     final Calendar myCalendar = Calendar.getInstance();
     Random rand = new Random();
-    int numAlert;
+//    int numAlert;
 
 
     @Override
@@ -210,7 +210,7 @@ public boolean onOptionsItemSelected(MenuItem item) {
                     }
                 }
 
-                if (vacation == null) {
+                 if (vacation == null) {
                     Log.e("ExcursionSave", "Vacation not found for ID: " + vacationId);
                     Toast.makeText(this, "Associated vacation not found.", Toast.LENGTH_SHORT).show();
                     return false;
@@ -282,11 +282,12 @@ public boolean onOptionsItemSelected(MenuItem item) {
         Long trigger = myDate.getTime();
         Intent intent = new Intent(ExcursionInformation.this, Receiver.class);
         intent.putExtra("key", "Excursion " + excursionName + " is today");
-        PendingIntent sender = PendingIntent.getBroadcast(ExcursionInformation.this, numAlert, intent, PendingIntent.FLAG_IMMUTABLE);
+        PendingIntent sender = PendingIntent.getBroadcast(ExcursionInformation.this, MainActivity.numAlert, intent, PendingIntent.FLAG_IMMUTABLE);
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);
-        numAlert = rand.nextInt(99999);
-        System.out.println("numAlert Excursion = " + numAlert);
+//        numAlert = rand.nextInt(99999);
+        Toast.makeText(this, "test", Toast.LENGTH_SHORT).show();
+//        System.out.println("numAlert Excursion = " + numAlert);
 
         return true;
     }
@@ -342,7 +343,6 @@ public boolean onOptionsItemSelected(MenuItem item) {
         super.onResume();
 }
 }
-
 
 
 

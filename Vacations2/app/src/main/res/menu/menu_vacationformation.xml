@@ -9,4 +9,8 @@
     <item android:title="Delete Vacation"
         android:id="@+id/vacationdelete"
         tools:ignore="HardcodedText" />
+    <item
+        android:id="@+id/vacationshare"
+        android:title="Share Vacation"
+        tools:ignore="HardcodedText" />
 </menu>

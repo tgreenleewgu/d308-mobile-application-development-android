@@ -56,6 +56,7 @@ public class VacationInformation extends AppCompatActivity {
 
         fab.setOnClickListener(v -> {
             Intent intent = new Intent(VacationInformation.this, ExcursionInformation.class);
+            intent.putExtra("vacationId", vacationId); // Pass the vacation ID
             startActivity(intent);
         });
         // Initialize buttons
@@ -140,11 +141,24 @@ public boolean onOptionsItemSelected(MenuItem item) {
             return false;
         }
 
+
         // Delete the vacation
         Vacation vacationToDelete = new Vacation(vacationId, null, null, null, null);
         repository.deleteVacation(vacationToDelete);
         Toast.makeText(this, "Vacation deleted successfully!", Toast.LENGTH_SHORT).show();
         finish(); // Close the activity
+        return true;
+    }
+    else if(item.getItemId() == R.id.vacationshare){
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_TEXT, "Vacation Name: " + vacationName + "\n" +
+                "Hotel: " + vacationHotel + "\n" +
+                "Start Date: " + startDate + "\n" +
+                "End Date: " + endDate);
+        intent.setType("text/plain");
+        Intent shareIntent = Intent.createChooser(intent, null);
+        startActivity(shareIntent);
         return true;
     }
 
