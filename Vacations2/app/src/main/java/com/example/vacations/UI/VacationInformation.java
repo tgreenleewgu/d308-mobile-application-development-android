@@ -1,7 +1,10 @@
 package com.example.vacations.UI;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -24,9 +27,13 @@ import com.example.vacations.entities.Excursion;
 import com.example.vacations.entities.Vacation;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class VacationInformation extends AppCompatActivity {
     String vacationName; // Variable to store vacation name
@@ -159,6 +166,47 @@ public boolean onOptionsItemSelected(MenuItem item) {
         intent.setType("text/plain");
         Intent shareIntent = Intent.createChooser(intent, null);
         startActivity(shareIntent);
+        return true;
+    }
+    if (item.getItemId() == R.id.vacationalert) {
+        String startDateFromScreen = startDate.repeat(1);
+        String endDateFromScreen = endDate.repeat(1);
+        String alert = "Vacation to " + vacationName + " starts today and ends on " + endDateFromScreen;
+
+        String myFormat = "MM/dd/yy";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        Date startDate = null;
+        Date endDate = null;
+
+        try {
+            startDate = sdf.parse(startDateFromScreen);
+            endDate = sdf.parse(endDateFromScreen);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Long startTrigger = startDate != null ? startDate.getTime() : 0;
+        Long endTrigger = endDate != null ? endDate.getTime() : 0;
+
+        // Setting an alarm for the start date
+        Intent startIntent = new Intent(VacationInformation.this, Receiver.class);
+        startIntent.putExtra("key", "Vacation to " + vacationName + " starts today");
+        PendingIntent startSender = PendingIntent.getBroadcast(VacationInformation.this, MainActivity.numAlert, startIntent, PendingIntent.FLAG_IMMUTABLE);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        if (startTrigger > 0) {
+            alarmManager.set(AlarmManager.RTC_WAKEUP, startTrigger, startSender);
+        }
+
+        // Setting an alarm for the end date
+        Intent endIntent = new Intent(VacationInformation.this, Receiver.class);
+        endIntent.putExtra("key", "Vacation to " + vacationName + " ends today");
+        PendingIntent endSender = PendingIntent.getBroadcast(VacationInformation.this, MainActivity.numAlert + 1, endIntent, PendingIntent.FLAG_IMMUTABLE);
+        if (endTrigger > 0) {
+            alarmManager.set(AlarmManager.RTC_WAKEUP, endTrigger, endSender);
+        }
+
+        Toast.makeText(this, "Vacation alert set", Toast.LENGTH_SHORT).show();
+
         return true;
     }
 

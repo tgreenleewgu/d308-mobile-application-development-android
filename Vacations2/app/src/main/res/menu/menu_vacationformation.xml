@@ -13,4 +13,8 @@
         android:id="@+id/vacationshare"
         android:title="Share Vacation"
         tools:ignore="HardcodedText" />
+    <item
+        android:id="@+id/vacationalert"
+        android:title="Share Alert Reminder"
+        tools:ignore="HardcodedText" />
 </menu>

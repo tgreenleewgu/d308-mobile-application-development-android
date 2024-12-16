@@ -75,33 +75,33 @@ public class Vacation_List extends AppCompatActivity {
 
        if(item.getItemId()==R.id.add_vacation){
            //Paris
-           Vacation vacation1 = new Vacation(0, "Paris", "Le Meridien Etoile", "06/15/2024", "06/22/2024");
+           Vacation vacation1 = new Vacation(0, "Paris", "Le Meridien Etoile", "06/15/2025", "06/22/2025");
            repository.insertVacation(vacation1);
 
            // Excursions for Paris
-           Excursion excursion1 = new Excursion(0, "Eiffel Tower", 1, "06/16/2024");
+           Excursion excursion1 = new Excursion(0, "Eiffel Tower", 1, "06/16/2025");
            repository.insertExcursion(excursion1);
-           Excursion excursion2 = new Excursion(0, "Louvre Museum", 1, "06/17/2024");
+           Excursion excursion2 = new Excursion(0, "Louvre Museum", 1, "06/17/2025");
            repository.insertExcursion(excursion2);
 
            //New York
-           Vacation vacation2 = new Vacation(0, "New York", "The Plaza Hotel", "09/01/2024", "09/07/2024");
+           Vacation vacation2 = new Vacation(0, "New York", "The Plaza Hotel", "09/01/2025", "09/07/2025");
            repository.insertVacation(vacation2);
 
            // Excursions for New York
-           Excursion excursion3 = new Excursion(0, "Statue of Liberty", 2, "09/02/2024");
+           Excursion excursion3 = new Excursion(0, "Statue of Liberty", 2, "09/02/2025");
            repository.insertExcursion(excursion3);
-           Excursion excursion4 = new Excursion(0, "Central Park", 2, "09/03/2024");
+           Excursion excursion4 = new Excursion(0, "Central Park", 2, "09/03/2025");
            repository.insertExcursion(excursion4);
 
            //Tokyo
-           Vacation vacation3 = new Vacation(0, "Tokyo", "Shinjuku Granbell Hotel", "10/10/2024", "10/17/2024");
+           Vacation vacation3 = new Vacation(0, "Tokyo", "Shinjuku Granbell Hotel", "10/10/2025", "10/17/2025");
            repository.insertVacation(vacation3);
 
            // Excursions for Tokyo
-           Excursion excursion5 = new Excursion(0, "Tokyo Tower", 3, "10/11/2024");
+           Excursion excursion5 = new Excursion(0, "Tokyo Tower", 3, "10/11/2025");
            repository.insertExcursion(excursion5);
-           Excursion excursion6 = new Excursion(0, "Shibuya Crossing", 3, "10/12/2024");
+           Excursion excursion6 = new Excursion(0, "Shibuya Crossing", 3, "10/12/2025");
            repository.insertExcursion(excursion6);
 
            //London
